@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StoreDiseaseRequest;
-use App\Http\Requests\UpdateDiseaseRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Disease\StoreDiseaseRequest;
+use App\Http\Requests\Admin\Disease\UpdateDiseaseRequest;
 use App\Models\Disease;
 
 class DiseaseController extends Controller
