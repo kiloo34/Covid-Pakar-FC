@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Pakar;
 
-use App\Http\Requests\StoreSymptomRequest;
-use App\Http\Requests\UpdateSymptomRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Pakar\Symptom\StoreSymptomRequest;
+use App\Http\Requests\Pakar\Symptom\UpdateSymptomRequest;
 use App\Models\Symptom;
 
 class SymptomController extends Controller

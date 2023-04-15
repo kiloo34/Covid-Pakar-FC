@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Pakar\Symptom;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSymptomRequest extends FormRequest
+class StoreSymptomRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
