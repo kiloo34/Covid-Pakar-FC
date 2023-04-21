@@ -1,3 +1,3 @@
 <div class="breadcrumb-item {{ $subtitle == null ? 'active' : '' }}">
-    {{ucfirst($subtitle)}}
+    {{ ucwords(str_replace('_', ' ', $subtitle)) }}
 </div>

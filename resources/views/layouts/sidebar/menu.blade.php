@@ -1,5 +1,19 @@
 <li class="menu-header">{{__("Menu")}}</li>
-@if (auth()->user()->role->name == 'admin')
+@if (auth()->user()->role->id == 1)
+<li class="{{ $active == 'disease' ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('admin.penyakit.index') }}">
+        <i class="far fa-tag"></i>
+        <span>{{__('Penyakit')}}</span>
+    </a>
+</li>
+@elseif (auth()->user()->role->id == 2)
+<li class="{{ $active == 'diseaseCategory' ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('pakar.kategori_penyakit.index') }}">
+        <i class="far fa-tag"></i>
+        <span>{{__('Penyakit')}}</span>
+    </a>
+</li>
+@endif
 {{-- <li class="nav-item dropdown {{ $active == 'produksi' || $active == 'permintaan' ? 'active' : '' }}">
     <a href="#" class="nav-link has-dropdown"><i class="fas fa-seedling"></i><span>Buah Naga</span></a>
     <ul class="dropdown-menu">
@@ -17,7 +31,7 @@
         <span>{{__('Obat')}}</span>
     </a>
 </li> --}}
-<li class="menu-header">{{__("Transaksi")}}</li>
+{{-- <li class="menu-header">{{__("Transaksi")}}</li> --}}
 {{-- <li class="{{ $active == 'order' ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('order.index') }}">
         <i class="far fa-tag"></i>
@@ -76,4 +90,3 @@
         <span>{{__('Profil')}}</span>
     </a>
 </li> --}}
-@endif
