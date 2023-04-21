@@ -4,6 +4,6 @@
     @else
     <a href="#">
     @endauth
-    {{ucfirst($title)}}
+    {{ ucwords(str_replace('_', ' ', $title)) }}
     </a>
 </div>

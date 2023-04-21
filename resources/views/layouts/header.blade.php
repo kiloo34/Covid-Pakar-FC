@@ -1,5 +1,5 @@
 <div class="section-header">
-    <h1>{{ucfirst($title)}}</h1>
+    <h1>{{ ucwords(str_replace('_', ' ', $title)) }}</h1>
     <div class="section-header-breadcrumb">
         @include('layouts.header.level-1')
         @include('layouts.header.level-2')

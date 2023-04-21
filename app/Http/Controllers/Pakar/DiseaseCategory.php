@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Pakar;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Disease\StoreDiseaseRequest;
-use App\Http\Requests\Admin\Disease\UpdateDiseaseRequest;
-use App\Models\Disease;
+use App\Http\Requests\Pakar\DiseaseCategory\StoreDiseaseCategoryRequest;
+use App\Http\Requests\Pakar\DiseaseCategory\UpdateDiseaseCategoryRequest;
 
-class DiseaseController extends Controller
+class DiseaseCategory extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.disease.index', [
-            'title'     => 'penyakit',
+        return view('pakar.disease.category.index', [
+            'title'     => 'kategori_penyakit',
             'subtitle'  => '',
             'data'      => '',
-            'active'    => 'disease'
+            'active'    => 'diseaseCategory'
         ]);
     }
 
@@ -27,18 +26,18 @@ class DiseaseController extends Controller
      */
     public function create()
     {
-        return view('admin.disease.create', [
-            'title'     => 'penyakit',
+        return view('pakar.disease.category.create', [
+            'title'     => 'kategori_penyakit',
             'subtitle'  => 'create',
             'data'      => '',
-            'active'    => 'disease'
+            'active'    => 'diseaseCategory'
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDiseaseRequest $request)
+    public function store(StoreDiseaseCategoryRequest $request)
     {
         //
     }
@@ -46,7 +45,7 @@ class DiseaseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Disease $disease)
+    public function show(string $id)
     {
         //
     }
@@ -54,7 +53,7 @@ class DiseaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Disease $disease)
+    public function edit(string $id)
     {
         //
     }
@@ -62,7 +61,7 @@ class DiseaseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDiseaseRequest $request, Disease $disease)
+    public function update(UpdateDiseaseCategoryRequest $request, string $id)
     {
         //
     }
@@ -70,7 +69,7 @@ class DiseaseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Disease $disease)
+    public function destroy(string $id)
     {
         //
     }

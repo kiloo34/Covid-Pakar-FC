@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 // Admin
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
-
+use App\Http\Controllers\Admin\DiseaseController as AdminDisease;
 // Pakar
 use App\Http\Controllers\Pakar\DashboardController as PakarDashboard;
+use App\Http\Controllers\Pakar\DiseaseCategory as PakarDiseaseCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,19 +28,27 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::group([
-        'prefix' => '/admin',
-        'middleware' => ['role:admin'],
+        'prefix'        => '/admin',
+        'as'            => 'admin.',
+        'middleware'    => ['role:admin'],
     ], function () {
     	// Dashboard
-        Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('admin.dashboard.index');
+        Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard.index');
+        
+        // Disease
+        Route::resource('penyakit', AdminDisease::class);
     });
 
     Route::group([
-        'prefix' => '/pakar',
-        'middleware' => ['role:pakar'],
+        'prefix'        => '/pakar',
+        'as'            => 'pakar.',
+        'middleware'    => ['role:pakar'],
     ], function () {
     	// Dashboard
-        Route::get('/dashboard', [PakarDashboard::class, 'index'])->name('pakar.dashboard.index');
+        Route::get('/dashboard', [PakarDashboard::class, 'index'])->name('dashboard.index');
+
+        // Disease Category
+        Route::resource('kategori_penyakit', PakarDiseaseCategory::class);
     });
 });
 

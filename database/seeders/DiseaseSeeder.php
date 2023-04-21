@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Disease;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,13 @@ class DiseaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Disease::truncate();
+        Disease::insert([
+            [
+                'code'  => 'p01',
+                'name'  => 'covid'
+            ]
+        ]);
     }
 }

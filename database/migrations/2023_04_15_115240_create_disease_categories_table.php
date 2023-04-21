@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('diseases', function (Blueprint $table) {
+        Schema::create('disease_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->comment('name of disease');
-            $table->string('code')->comment('code of disease');
+            $table->string('name')->comment('name of disease category');
+            $table->string('code')->comment('code of disease category');
+            $table->unsignedBigInteger('disease_id');
+
+            $table->foreign('disease_id')->references('id')->on('diseases');
+
             $table->timestamps();
         });
     }
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('diseases');
+        Schema::dropIfExists('disease_categories');
     }
 };
