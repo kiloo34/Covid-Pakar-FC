@@ -14,7 +14,12 @@ class SymptomController extends Controller
      */
     public function index()
     {
-        //
+        return view('pakar.symptom.index', [
+            'title'     => 'gejala',
+            'subtitle'  => '',
+            'data'      => '',
+            'active'    => 'symptom'
+        ]);
     }
 
     /**
@@ -22,7 +27,12 @@ class SymptomController extends Controller
      */
     public function create()
     {
-        //
+        return view('pakar.symptom.create', [
+            'title'     => 'gejala',
+            'subtitle'  => 'create',
+            'data'      => '',
+            'active'    => 'symptom'
+        ]);
     }
 
     /**
