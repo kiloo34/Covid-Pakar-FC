@@ -22,7 +22,6 @@
                                 <th>{{__('Total Kategori Penyakit')}}</th>
                                 <th>{{__('Aksi')}}</th>
                             </thead>
-                            <tbody></tbody>
                         </table>
                     </div>
                 </div>

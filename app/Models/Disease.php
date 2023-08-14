@@ -13,7 +13,8 @@ class Disease extends Model
     protected $table = 'diseases';
 
     protected $fillable = [
-        'name'
+        'name',
+        'code'
     ];
 
     /**
