@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DiseaseController as AdminDisease;
 // Pakar
 use App\Http\Controllers\Pakar\DashboardController as PakarDashboard;
 use App\Http\Controllers\Pakar\DiseaseCategory as PakarDiseaseCategory;
+use App\Http\Controllers\Pakar\QuestionController as PakarQuestion;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,9 @@ Route::middleware(['auth'])->group(function () {
 
         // Disease Category
         Route::resource('kategori_penyakit', PakarDiseaseCategory::class);
+        
+        // Question
+        Route::resource('pertanyaan', PakarQuestion::class);
     });
 });
 
