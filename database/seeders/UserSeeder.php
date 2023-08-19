@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class UserSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Schema::disableForeignKeyConstraints();
         User::truncate();
         User::insert([
             [
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
                 'name' => 'PAKAR'
             ]
         ]);
+        Schema::enableForeignKeyConstraints();
     }
 }
  
