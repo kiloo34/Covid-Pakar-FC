@@ -11,7 +11,7 @@ class StoreDiseaseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,23 @@ class StoreDiseaseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|max:255',
+            'code' => 'required|max:5'
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'Nama tidak boleh kosong',
+            'name.max' => 'Nama terlalu panjang maksimal :max karakter',
+            'code.required' => 'Kode tidak boleh kosong',
+            'code.max' => 'Kode terlalu panjang, maksimal :max karakter',
         ];
     }
 }

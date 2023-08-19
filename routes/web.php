@@ -37,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
         
         // Disease
         Route::resource('penyakit', AdminDisease::class);
+        // Ajax
+        Route::get('ajax/penyakit/all', [AdminDisease::class, 'getAllData'])->name('ajax.penyakit.all');
     });
 
     Route::group([
