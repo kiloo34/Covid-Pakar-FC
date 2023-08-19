@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Disease;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class DiseaseSeeder extends Seeder
 {
@@ -13,13 +14,14 @@ class DiseaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Schema::disableForeignKeyConstraints();
         Disease::truncate();
         Disease::insert([
             [
                 'code'  => 'p01',
                 'name'  => 'covid'
-            ]
-        ]);
+                ]
+            ]);
+        Schema::enableForeignKeyConstraints();
     }
 }
