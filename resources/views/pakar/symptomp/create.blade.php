@@ -10,12 +10,11 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.penyakit.store') }}" method="post">
+                <form action="#" method="post">
                     {{-- {{ route('tipe.store') }} --}}
                     @csrf
                     <div class="form-group">
-                        {{-- <label>{{ __("Nama Wabah / Penyakit / Virus") }}</label> --}}
-                        <label>Nama Wabah / Penyakit / Virus</label>
+                        <label>name</label>
                         <input name="name" type="text" class="form-control @error('name') is-invalid @enderror"
                             value="{{ old('name') }}" autocomplete="name" autofocus>
                         @error('name')

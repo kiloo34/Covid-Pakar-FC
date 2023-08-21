@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Disease;
+use App\Models\Symptom;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
-class DiseaseSeeder extends Seeder
+class SymptomSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,13 +15,18 @@ class DiseaseSeeder extends Seeder
     public function run(): void
     {
         Schema::disableForeignKeyConstraints();
-        Disease::truncate();
-        Disease::insert([
+        Symptom::truncate();
+        Symptom::insert([
             [
-                'code'  => 'p01',
-                'name'  => 'covid'
-            ]
+                'name' => 'flu'
+            ],
+            [
+                'name' => 'batuk'
+            ],
+            [
+                'name' => 'panas'
+            ],
         ]);
-        Schema::enableForeignKeyConstraints();
+        Schema::enableForeignKeyConstraints(); 
     }
 }
