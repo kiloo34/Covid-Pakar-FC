@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class RoleSeeder extends Seeder
@@ -23,8 +22,8 @@ class RoleSeeder extends Seeder
             ],
             [
                 'name' => 'pakar'
-                ]
-            ]);
+            ]
+        ]);
         Schema::enableForeignKeyConstraints();
     }
 }

@@ -14,7 +14,7 @@ class DiseaseCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Schema::disableForeignKeyConstraints();  
+        Schema::disableForeignKeyConstraints();
         DiseaseCategory::truncate();
         DiseaseCategory::insert([
             [

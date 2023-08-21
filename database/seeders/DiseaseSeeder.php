@@ -20,8 +20,8 @@ class DiseaseSeeder extends Seeder
             [
                 'code'  => 'p01',
                 'name'  => 'covid'
-                ]
-            ]);
+            ]
+        ]);
         Schema::enableForeignKeyConstraints();
     }
 }
