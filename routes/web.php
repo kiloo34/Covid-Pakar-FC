@@ -5,10 +5,12 @@ use Illuminate\Support\Facades\Route;
 // Admin
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\DiseaseController as AdminDisease;
+
 // Pakar
 use App\Http\Controllers\Pakar\DashboardController as PakarDashboard;
 use App\Http\Controllers\Pakar\DiseaseCategory as PakarDiseaseCategory;
 use App\Http\Controllers\Pakar\QuestionController as PakarQuestion;
+use App\Http\Controllers\Pakar\SymptomController as PakarSymptom;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
         
         // Disease
         Route::resource('penyakit', AdminDisease::class);
+        // Ajax
+        Route::get('ajax/penyakit/all', [AdminDisease::class, 'getAllData'])->name('ajax.penyakit.all');
     });
 
     Route::group([
@@ -53,6 +57,9 @@ Route::middleware(['auth'])->group(function () {
         
         // Question
         Route::resource('pertanyaan', PakarQuestion::class);
+        
+        // Symptom
+        Route::resource('gejala', PakarSymptom::class);
     });
 });
 

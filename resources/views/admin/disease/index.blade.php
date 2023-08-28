@@ -19,9 +19,9 @@
                             <thead>
                                 <th>{{__('No')}}</th>
                                 <th>{{__('Nama Penyakit')}}</th>
+                                <th>{{__('Kode')}}</th>
                                 <th>{{__('Aksi')}}</th>
                             </thead>
-                            <tbody></tbody>
                         </table>
                     </div>
                 </div>
@@ -33,7 +33,37 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        $('#disease-category').DataTable();
+        $('#disease-category').DataTable({
+            "language": {
+                "emptyTable": "Data Catin Kosong"
+            },
+            "responsive": true,
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{{ route('admin.ajax.penyakit.all') }}",
+            "columns": [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'name', name: 'name'},
+                {data: 'code', name: 'code'},
+                {data: 'action', name: 'action'},
+            ]
+        });
+
+        $('.hapus-penyakit').on('click', function (e) {
+            e.preventDefault();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            var id = $(this).data("id");            
+            url = url.replace(':id', id);
+            $object=$(this);
+
+            console.log(id);
+        });
     });
 </script>
 @endpush

@@ -7,11 +7,16 @@
     </a>
 </li>
 @elseif (auth()->user()->role->id == 2)
-<li class="{{ $active == 'diseaseCategory' ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('pakar.kategori_penyakit.index') }}">
-        <i class="far fa-tag"></i>
-        <span>{{__('Penyakit')}}</span>
-    </a>
+<li class="nav-item dropdown {{ $active == 'diseaseCategory' || $active == 'symptom' ? 'active' : '' }}">
+    <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Penyakit</span></a>
+    <ul class="dropdown-menu">
+        <li class="{{ $active == 'diseaseCategory' ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('pakar.kategori_penyakit.index') }}">{{ __('Kategori Penyakit') }}</a>
+        </li>
+        <li class="{{ $active == 'symptom' ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('pakar.gejala.index') }}">{{ __('Gejala') }}</a>
+        </li>
+    </ul>
 </li>
 <li class="{{ $active == 'question' ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('pakar.pertanyaan.index') }}">
