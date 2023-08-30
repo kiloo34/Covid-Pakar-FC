@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\DiseaseController as AdminDisease;
 
 // Pakar
 use App\Http\Controllers\Pakar\DashboardController as PakarDashboard;
-use App\Http\Controllers\Pakar\DiseaseCategory as PakarDiseaseCategory;
+use App\Http\Controllers\Pakar\DiseaseCategoryController as PakarDiseaseCategory;
 use App\Http\Controllers\Pakar\SymptomController as PakarSymptom;
 
 /*
@@ -42,17 +42,20 @@ Route::middleware(['auth'])->group(function () {
         // Ajax
         Route::get('ajax/penyakit/all', [AdminDisease::class, 'getAllData'])->name('ajax.penyakit.all');
     });
-
+    
     Route::group([
         'prefix'        => '/pakar',
         'as'            => 'pakar.',
         'middleware'    => ['role:pakar'],
     ], function () {
-    	// Dashboard
+        // Dashboard
         Route::get('/dashboard', [PakarDashboard::class, 'index'])->name('dashboard.index');
-
+        
         // Disease Category
         Route::resource('kategori_penyakit', PakarDiseaseCategory::class);
+        // Ajax
+        Route::get('ajax/penyakit/all', [PakarDiseaseCategory::class, 'getAllData'])->name('ajax.penyakit.all');
+        Route::get('ajax/kategori_penyakit/{diseaseId}/all', [PakarDiseaseCategory::class, 'getAllDataCategory'])->name('ajax.category.all');
         
         // Symptom
         Route::resource('gejala', PakarSymptom::class);
