@@ -11,7 +11,7 @@ class StoreDiseaseCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,22 @@ class StoreDiseaseCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'category' => 'required|max:255',
+            'disease' => 'required'
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'category.required' => 'Kategori tidak boleh kosong',
+            'category.max' => 'Kategori terlalu panjang maksimal :max karakter',
+            'disease.required' => 'Pilih Salah Satu',
         ];
     }
 }

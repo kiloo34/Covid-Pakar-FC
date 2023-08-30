@@ -4,17 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class DiseaseCategory extends Model
 {
     use HasFactory;
 
-    protected $table = 'disease_categories';
-
     protected $fillable = [
         'code',
-        'name'
+        'name',
+        'disease_id'
     ];
 
     /**
@@ -24,6 +24,16 @@ class DiseaseCategory extends Model
      */
     public function disease(): HasOne
     {
-        return $this->hasOne(User::class, 'disease_id');
+        return $this->hasOne(Disease::class);
     }
+
+    /**
+     * Get the disease that owns the DiseaseCategory
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    // public function disease(): BelongsTo
+    // {
+    //     return $this->belongsTo(Disease::class, 'id', 'disease_id');
+    // }
 }
