@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="disease-table" class="table table-striped">
+                        <table id="disease-category-table" class="table table-striped">
                             <thead>
                                 <th>{{__('No')}}</th>
                                 <th>{{__('Nama Penyakit')}}</th>
@@ -37,9 +37,9 @@
         var diseaseId = {{ $disease->id }};
         datatableUrl = datatableUrl.replace(':id', diseaseId);
 
-        $('#disease-table').DataTable({
+        $('#disease-category-table').DataTable({
             "language": {
-                "emptyTable": "Data Catin Kosong"
+                "emptyTable": "Data Kategori Penyakit Kosong"
             },
             "responsive": true,
             "processing": true,
@@ -49,7 +49,6 @@
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'name', name: 'name'},
                 {data: 'code', name: 'code'},
-                // {data: 'total', name: 'total'},  
                 {data: 'action', name: 'action'},
             ]
         });
@@ -94,13 +93,6 @@
         });
         console.log(id);
     }
-
-    function reloadTable(selector, counter) {
-        setTimeout(function() {
-            $(selector).DataTable().ajax.reload();
-        }, 100);
-    }
-
 </script>
 @endpush
 @include('import.datatable')

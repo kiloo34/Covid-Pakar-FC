@@ -98,9 +98,8 @@ class DiseaseCategoryController extends Controller
 
     public function getAllData(Request $request)
     {
-        // if($request->ajax()) {
+        if($request->ajax()) {
             $datas = Disease::all();
-            // dump($datas->load('categories'));
             return DataTables::of($datas)
                 ->addIndexColumn()
                 ->addColumn('name', function($row){
@@ -129,13 +128,14 @@ class DiseaseCategoryController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-        // } else {
-        //     return response()->json(['text'=>'only ajax request']);
-        // }
+        } else {
+            return response()->json(['text'=>'only ajax request']);
+        }
     }
+
     public function getAllDataCategory(Request $request, $diseaseId)
     {
-        // if($request->ajax()) {
+        if($request->ajax()) {
             $datas = DiseaseCategory::where('disease_id', $diseaseId)->get();
             // dump($datas);
             // dd('masuk');
@@ -151,12 +151,6 @@ class DiseaseCategoryController extends Controller
                     $code = ucwords($row->code);
                     return $code;
                 })
-                // ->addColumn('total', function($row){
-                //     $total = '';
-                //     // dump($row->categories);
-                //     $total = $row->category == null ? 0 : count($row->category);
-                //     return $total;
-                // })
                 ->addColumn('action', function($row){
                     $actionBtn = '<a href="'.route("pakar.kategori_penyakit.show", $row->id).'" class="btn btn-sm btn-info">
                                     <i class="fas fa-eye"></i>
@@ -175,8 +169,8 @@ class DiseaseCategoryController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-        // } else {
-        //     return response()->json(['text'=>'only ajax request']);
-        // }
+        } else {
+            return response()->json(['text'=>'only ajax request']);
+        }
     }
 }

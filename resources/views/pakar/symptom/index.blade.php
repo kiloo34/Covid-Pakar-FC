@@ -15,13 +15,14 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="disease" class="table table-striped">
+                        <table id="symptom-table" class="table table-striped">
                             <thead>
                                 <th>{{__('No')}}</th>
+                                <th>{{ __("Nama Wabah / Penyakit / Virus") }}</th>
+                                <th>{{__('Nama Kategori')}}</th>
                                 <th>{{__('Nama Gejala')}}</th>
                                 <th>{{__('Aksi')}}</th>
                             </thead>
-                            <tbody></tbody>
                         </table>
                     </div>
                 </div>
@@ -33,7 +34,22 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        $('#disease').DataTable();
+        $('#symptom-table').DataTable({
+            "language": {
+                "emptyTable": "Data Gejala Kosong"
+            },
+            "responsive": true,
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{{ route('pakar.ajax.gejala.all') }}",
+            "columns": [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'diseaseName', name: 'diseaseName'},
+                {data: 'diseaseCategory', name: 'diseaseCategory'},
+                {data: 'name', name: 'name'},
+                {data: 'action', name: 'action'},
+            ]
+        });
     });
 </script>
 @endpush

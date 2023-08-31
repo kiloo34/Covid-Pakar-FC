@@ -11,7 +11,7 @@ class StoreSymptomRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,23 @@ class StoreSymptomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'symptomName' => 'required|unique:symptoms,name|max:255',
+            'diseaseCategory' => 'required'
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'symptomName.required' => 'Nama Gejala / Rule tidak boleh kosong',
+            'symptomName.unique' => 'Nama Gejala / Rule sudah tersedia',
+            'symptomName.max' => 'Nama Gejala / Rule terlalu panjang maksimal :max karakter',
+            'diseaseCategory.required' => 'Pilih Salah Satu',
+        ];
+    } 
 }

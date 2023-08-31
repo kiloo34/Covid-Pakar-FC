@@ -59,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
         
         // Symptom
         Route::resource('gejala', PakarSymptom::class);
+        // Ajax
+        Route::get('ajax/gejala/all', [PakarSymptom::class, 'getAllDataCategory'])->name('ajax.gejala.all');
     });
 });
 

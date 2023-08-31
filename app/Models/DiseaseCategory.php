@@ -24,7 +24,7 @@ class DiseaseCategory extends Model
      */
     public function disease(): HasOne
     {
-        return $this->hasOne(Disease::class);
+        return $this->hasOne(Disease::class, 'id');
     }
 
     /**
@@ -34,6 +34,6 @@ class DiseaseCategory extends Model
      */
     // public function disease(): BelongsTo
     // {
-    //     return $this->belongsTo(Disease::class, 'id', 'disease_id');
+    //     return $this->belongsTo(Disease::class, 'id');
     // }
 }
