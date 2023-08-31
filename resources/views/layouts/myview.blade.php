@@ -74,6 +74,13 @@
 
         @stack('scripts')
 
+        <script>
+            function reloadTable(selector, counter) {
+                setTimeout(function() {
+                    $(selector).DataTable().ajax.reload();
+                }, 100);
+            }
+        </script>
     </body>
 
 </html>

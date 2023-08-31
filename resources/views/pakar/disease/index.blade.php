@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="disease" class="table table-striped">
+                        <table id="disease-table" class="table table-striped">
                             <thead>
                                 <th>{{__('No')}}</th>
                                 <th>{{__('Nama Penyakit')}}</th>
@@ -34,9 +34,9 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        $('#disease').DataTable({
+        $('#disease-table').DataTable({
             "language": {
-                "emptyTable": "Data Catin Kosong"
+                "emptyTable": "Data Penyakit Kosong"
             },
             "responsive": true,
             "processing": true,
@@ -49,22 +49,6 @@
                 {data: 'total', name: 'total'},
                 {data: 'action', name: 'action'},
             ]
-        });
-
-        $('.hapus-penyakit').on('click', function (e) {
-            e.preventDefault();
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            var id = $(this).data("id");            
-            url = url.replace(':id', id);
-            $object=$(this);
-
-            console.log(id);
         });
     });
 </script>

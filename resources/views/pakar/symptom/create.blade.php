@@ -10,13 +10,27 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="#" method="post">
+                <form action="{{ route('pakar.gejala.store') }}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label>name</label>
-                        <input name="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                            value="{{ old('name') }}" autocomplete="name" autofocus>
-                        @error('name')
+                        <label>{{ __("Nama Wabah / Penyakit / Virus") }}</label>
+                        <select name="diseaseCategory" class="form-control @error('diseaseCategory') is-invalid @enderror" value="{{ old('diseaseCategory') }}" autofocus>
+                            <option value="">{{ __("Pilih Kategori Wabah / Penyakit / Virus") }}</option>
+                            @foreach ($diseaseCategories as $diseaseCategory)
+                                <option value="{{$diseaseCategory->id}}"> {{ ucfirst($diseases->find($diseaseCategory->disease_id)->name) }} - {{ ucfirst($diseaseCategory->name) }}</option>
+                            @endforeach
+                        </select>
+                        @error('diseaseCategory')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label>{{ __("Nama Gejala") }}</label>
+                        <input name="symptomName" type="text" class="form-control @error('symptomName') is-invalid @enderror"
+                            value="{{ old('symptomName') }}" autocomplete="symptomName" autofocus>
+                        @error('symptomName')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
