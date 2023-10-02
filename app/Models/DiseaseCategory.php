@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class DiseaseCategory extends Model
@@ -28,12 +29,12 @@ class DiseaseCategory extends Model
     }
 
     /**
-     * Get the disease that owns the DiseaseCategory
+     * Get all of the symptom for the DiseaseCategory
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    // public function disease(): BelongsTo
-    // {
-    //     return $this->belongsTo(Disease::class, 'id');
-    // }
+    public function symptom(): HasMany
+    {
+        return $this->hasMany(Symptom::class,);
+    }
 }

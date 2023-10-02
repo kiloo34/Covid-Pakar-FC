@@ -30,6 +30,7 @@
     </div>
 @endsection
 
+@include('import.datatable')
 @push('scripts')
 <script>
     $(document).ready(function() {
@@ -79,7 +80,7 @@
                             text: response.message,
                             icon: 'success',
                         });
-                        reloadTable('#disease-table', 100);
+                        reloadTable('#disease-category-table');
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         console.log(jqXHR, textStatus, errorThrown);
@@ -91,8 +92,6 @@
                 });
             }
         });
-        console.log(id);
     }
 </script>
 @endpush
-@include('import.datatable')

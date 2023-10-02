@@ -132,13 +132,10 @@ class DiseaseCategoryController extends Controller
             return response()->json(['text'=>'only ajax request']);
         }
     }
-
     public function getAllDataCategory(Request $request, $diseaseId)
     {
         if($request->ajax()) {
             $datas = DiseaseCategory::where('disease_id', $diseaseId)->get();
-            // dump($datas);
-            // dd('masuk');
             return DataTables::of($datas)
                 ->addIndexColumn()
                 ->addColumn('name', function($row){
