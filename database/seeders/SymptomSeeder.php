@@ -21,6 +21,9 @@ class SymptomSeeder extends Seeder
                 'name' => 'Batuk'
             ],
             [
+                'name' => 'flu'
+            ],
+            [
                 'name' => 'Demam'
             ],
             [

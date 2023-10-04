@@ -5,20 +5,31 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class SymptomDiseaseCategory extends Model
 {
     use HasFactory;
 
-    protected $table = 'symptom_disease_categories';
+    protected $fillable = ['symptom_category_id', 'disease_category_id'];
 
     /**
-     * Get the sympthom that owns the SymptomDiseaseCategory
+     * Get the symtom_category that owns the SymptomDiseaseCategory
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function symptom(): BelongsTo
+    public function symptom_category(): BelongsTo
     {
-        return $this->belongsTo(Symptom::class, 'symptom_id');
+        return $this->belongsTo(SymptomCategory::class, 'symptom_category_id');
+    }
+
+    /**
+     * Get the disease_category that owns the SymptomDiseaseCategory
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function disease_category(): BelongsTo
+    {
+        return $this->belongsTo(DiseaseCategory::class, 'disease_category_id');
     }
 }

@@ -122,15 +122,16 @@ class SymptomController extends Controller
                 })
                 ->addColumn('name', function($row){
                     $symptomName = '';
-                    $symptoms = SymptomDiseaseCategory::join('symptoms', 'symptoms.id', '=', 'symptom_disease_categories.symptom_id')
-                        ->where('disease_category_id', $row->id)
-                        ->pluck('symptoms.name')
-                        ->toArray();
-                    
-                    if (count($symptoms) != 0) {
-                        $symptomName = '<ul><li>';
-                        $symptomName .= implode('</li><li>', $symptoms);
-                        $symptomName .= '</ul>';
+
+                    if (count($row->symptom_disease_categories) != 0) {
+                        $symptomName = '<ul>';
+                        foreach ($row->symptom_disease_categories as $data) {
+                            $symptomName .= '<li>';
+                            $symptomName .= $data->symptom_category->symptom->name ?? ' ';
+                            $symptomName .= ' ' . $data->symptom_category->name;
+                            $symptomName .= '</li>';
+                        }
+                        $symptomName .= '</li>';
                     } else {
                         $symptomName = 'data gejala tidak ditemukan';
 

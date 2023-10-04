@@ -46,11 +46,6 @@ class DiseaseCategorySeeder extends Seeder
                 'code'  => 'T06',
                 'name'  => 'terinfeksi omicron',
                 'disease_id' => 1
-            ],
-            [
-                'code'  => 'T07',
-                'name'  => 'terinfeksi delta',
-                'disease_id' => 1
             ]
         ];
         collect($datas)->each(function ($data) { DiseaseCategory::create($data); });
