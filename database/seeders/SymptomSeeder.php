@@ -16,17 +16,72 @@ class SymptomSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
         Symptom::truncate();
-        Symptom::insert([
+        $datas = [
+            [
+                'name' => 'Batuk'
+            ],
             [
                 'name' => 'flu'
             ],
             [
-                'name' => 'batuk'
+                'name' => 'Demam'
             ],
             [
-                'name' => 'panas'
+                'name' => 'Sakit tenggorokan'
             ],
-        ]);
+            [
+                'name' => 'sesak nafas'
+            ],
+            [
+                'name' => 'denyut jantung'
+            ],
+            [
+                'name' => 'indra penciuman'
+            ],
+            [
+                'name' => 'indra pengecap'
+            ],
+            [
+                'name' => 'kondisi'
+            ],
+            [
+                'name' => 'diare'
+            ],
+            [
+                'name' => 'nyeri tulang otot'
+            ],
+            [
+                'name' => 'fatingue'
+            ],
+            [
+                'name' => 'perjalanan ke luar negri'
+            ],
+            [
+                'name' => 'sakit kepala'
+            ],
+            [
+                'name' => 'nyeri badan'
+            ],
+            [
+                'name' => 'susah bernafas panjang'
+            ],
+            [
+                'name' => 'ruam pada kulit, atau perubahan warna pada jari tangan atau jari kaki'
+            ],
+            [
+                'name' => 'saturasi oksigen'
+            ],
+            [
+                'name' => 'selera makan'
+            ],
+            [
+                'name' => 'pucat'
+            ],
+            [
+                'name' => 'nyeri dada'
+            ],
+        ];
+        collect($datas)->each(function ($data) { Symptom::create($data); });
         Schema::enableForeignKeyConstraints(); 
     }
 }

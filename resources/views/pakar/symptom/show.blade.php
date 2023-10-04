@@ -18,9 +18,7 @@
                         <table id="symptom-table" class="table table-striped">
                             <thead>
                                 <th>{{__('No')}}</th>
-                                <th>{{ __("Nama Wabah / Penyakit / Virus") }}</th>
-                                <th>{{__('Nama Kategori')}}</th>
-                                <th>{{__('Nama Gejala')}}</th>
+                                <th>{{__("Nama Gejala") }}</th>
                                 <th>{{__('Aksi')}}</th>
                             </thead>
                         </table>
@@ -34,24 +32,30 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
+        var datatableUrl = "{{ route('pakar.ajax.gejala.detail.list', ':id') }}"
+        var symptomId = {{ $symptom->id }}
+        datatableUrl = datatableUrl.replace(':id', symptomId)
+
+        console.log(datatableUrl);
+        // console.log(diseaseId);
+
         $('#symptom-table').DataTable({
             "language": {
                 "emptyTable": "Data Gejala Kosong"
             },
             "responsive": true,
             "processing": true,
+            "ajax": datatableUrl,
             "serverSide": true,
-            "ajax": "{{ route('pakar.ajax.gejala.all') }}",
             "columns": [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'diseaseName', name: 'diseaseName'},
-                {data: 'diseaseCategory', name: 'diseaseCategory'},
-                {data: 'name', name: 'name'},
                 {data: 'action', name: 'action'},
             ]
         });
     });
 </script>
+
 @endpush
 
 @include('import.datatable')

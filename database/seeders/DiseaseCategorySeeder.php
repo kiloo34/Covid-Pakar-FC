@@ -16,23 +16,39 @@ class DiseaseCategorySeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
         DiseaseCategory::truncate();
-        DiseaseCategory::insert([
+        $datas = [
             [
-                'code'  => 't01',
+                'code'  => 'T01',
                 'name'  => 'terinfeksi ringan',
                 'disease_id' => 1
             ],
             [
-                'code'  => 't02',
+                'code'  => 'T02',
                 'name'  => 'terinfeksi sedang',
                 'disease_id' => 1
             ],
             [
-                'code'  => 't03',
+                'code'  => 'T03',
                 'name'  => 'terinfeksi berat',
                 'disease_id' => 1
+            ],
+            [
+                'code'  => 'T04',
+                'name'  => 'varian delta',
+                'disease_id' => 1
+            ],
+            [
+                'code'  => 'T05',
+                'name'  => 'terinfeksi alpha',
+                'disease_id' => 1
+            ],
+            [
+                'code'  => 'T06',
+                'name'  => 'terinfeksi omicron',
+                'disease_id' => 1
             ]
-        ]);
+        ];
+        collect($datas)->each(function ($data) { DiseaseCategory::create($data); });
         Schema::enableForeignKeyConstraints();
     }
 }
