@@ -16,14 +16,15 @@ class RoleSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
         Role::truncate();
-        Role::insert([
+        $datas = [
             [
                 'name' => 'admin'
             ],
             [
                 'name' => 'pakar'
             ]
-        ]);
+        ];
+        collect($datas)->each(function ($data) { Role::create($data); });
         Schema::enableForeignKeyConstraints();
     }
 }

@@ -16,11 +16,9 @@ class DiseaseSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
         Disease::truncate();
-        Disease::insert([
-            [
-                'code'  => 'p01',
-                'name'  => 'covid'
-            ]
+        Disease::create([
+            'code'  => 'P01',
+            'name'  => 'covid'
         ]);
         Schema::enableForeignKeyConstraints();
     }

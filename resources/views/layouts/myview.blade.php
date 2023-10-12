@@ -75,10 +75,10 @@
         @stack('scripts')
 
         <script>
-            function reloadTable(selector, counter) {
+            function reloadTable(selector, counter = 5000) {
                 setTimeout(function() {
                     $(selector).DataTable().ajax.reload();
-                }, 100);
+                }, counter);
             }
         </script>
     </body>

@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('symptom_disease_categories', function (Blueprint $table) {
+        Schema::create('diagnoses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('symptom_id')->constrained();
-            $table->foreignId('disease_category_id')->constrained();
             $table->timestamps();
         });
     }
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('symptom_disease_categories');
+        Schema::dropIfExists('diagnoses');
     }
 };

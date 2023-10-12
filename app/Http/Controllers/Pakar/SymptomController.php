@@ -69,9 +69,14 @@ class SymptomController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Symptom $symptom)
+    public function show(DiseaseCategory $gejala)
     {
-        //
+        return view('pakar.symptom.show', [
+            'title'             => 'gejala',
+            'subtitle'          => 'create',
+            'symptom'           => $gejala,
+            'active'            => 'symptom'
+        ]); 
     }
 
     /**
@@ -117,15 +122,16 @@ class SymptomController extends Controller
                 })
                 ->addColumn('name', function($row){
                     $symptomName = '';
-                    $symptoms = SymptomDiseaseCategory::join('symptoms', 'symptoms.id', '=', 'symptom_disease_categories.symptom_id')
-                        ->where('disease_category_id', $row->id)
-                        ->pluck('symptoms.name')
-                        ->toArray();
-                    
-                    if (count($symptoms) != 0) {
-                        $symptomName = '<ul><li>';
-                        $symptomName .= implode('</li><li>', $symptoms);
-                        $symptomName .= '</ul>';
+
+                    if (count($row->symptom_disease_categories) != 0) {
+                        $symptomName = '<ul>';
+                        foreach ($row->symptom_disease_categories as $data) {
+                            $symptomName .= '<li>';
+                            $symptomName .= $data->symptom_category->symptom->name ?? ' ';
+                            $symptomName .= ' ' . $data->symptom_category->name;
+                            $symptomName .= '</li>';
+                        }
+                        $symptomName .= '</li>';
                     } else {
                         $symptomName = 'data gejala tidak ditemukan';
 
@@ -133,19 +139,54 @@ class SymptomController extends Controller
                     return $symptomName;
                 })
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="'.route("pakar.kategori_penyakit.show", $row->id).'" class="btn btn-sm btn-info">
+                    $actionBtn = '<a href="'.route("pakar.gejala.show", $row->id).'" class="btn btn-sm btn-info">
                                     <i class="fas fa-eye"></i>
                                     Detail
                                 </a>
-                                <a href="'.route("pakar.kategori_penyakit.edit", $row->id).'" class="btn btn-sm btn-info">
+                                <a href="'.route("pakar.gejala.edit", $row->id).'" class="btn btn-sm btn-info">
+                                    <i class="fas fa-edit"></i>
+                                    Edit
+                                </a>
+                                ';
+                            //     <a href="javascript:void(0)" class="btn btn-sm btn-danger" onclick="deleteDiseaseCategory('.$row->id.')">
+                            //     <i class="fas fa-edit"></i>
+                            //     Hapus
+                            // </a>
+                    return $actionBtn;
+                })
+                ->rawColumns(['action', 'name'])
+                ->make(true);
+            return $dataTable;
+        } else {
+            return response()->json(['text'=>'only ajax request']);
+        }
+    }
+
+    public function getAllSympthom(Request $request, $kategori_penyakit) 
+    {
+        if($request->ajax()) {
+            $symptoms = SymptomDiseaseCategory::where('disease_category_id', $kategori_penyakit)->get();
+            $dataTable = DataTables::of($symptoms)
+                ->addIndexColumn()
+                ->addColumn('diseaseName', function($row){
+                    $name = '';
+                    $name = $row->symptom->name;
+                    return $name;
+                })
+                ->addColumn('action', function($row){
+                    $actionBtn = '
+                            <a href="'.route("pakar.gejala.show", $row->id).'" class="btn btn-sm btn-info">
+                                    <i class="fas fa-eye"></i>
+                                    Detail
+                                </a>
+                                <a href="'.route("pakar.gejala.edit", $row->id).'" class="btn btn-sm btn-info">
                                     <i class="fas fa-edit"></i>
                                     Edit
                                 </a>
                                 <a href="javascript:void(0)" class="btn btn-sm btn-danger" onclick="deleteDiseaseCategory('.$row->id.')">
-                                    <i class="fas fa-edit"></i>
-                                    Hapus
-                                </a>
-                                ';
+                                <i class="fas fa-edit"></i>
+                                Hapus
+                            </a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action', 'name'])

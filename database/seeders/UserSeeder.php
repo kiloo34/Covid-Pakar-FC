@@ -16,22 +16,21 @@ class UserSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
         User::truncate();
-        User::insert([
-            [
-                'username' => 'admin',
-                'email'  => 'admin@admin.com',
-                'password' => bcrypt('adminadmin'),
-                'role_id' => 1,
-                'name' => 'Administrator'
-            ],
-            [
-                'username' => 'pakar1',
-                'email'  => 'pakar@pakar.com',
-                'password' => bcrypt('pakarpakar'),
-                'role_id' => 2,
-                'name' => 'PAKAR'
-            ]
-        ]);
+        $datas = [[
+            'username' => 'admin',
+            'email'  => 'admin@admin.com',
+            'password' => bcrypt('adminadmin'),
+            'role_id' => 1,
+            'name' => 'Administrator'
+        ],
+        [
+            'username' => 'pakar1',
+            'email'  => 'pakar@pakar.com',
+            'password' => bcrypt('pakarpakar'),
+            'role_id' => 2,
+            'name' => 'PAKAR'
+        ]];
+        collect($datas)->each(function ($data) { User::create($data); });
         Schema::enableForeignKeyConstraints();
     }
 }

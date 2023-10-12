@@ -16,90 +16,75 @@ class SymptomSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
         Symptom::truncate();
-        Symptom::insert([
+        $datas = [
             [
-                'name' => 'Batuk kering'
+                'name' => 'Batuk'
             ],
             [
-                'name' => 'Merasakan Flu'
+                'name' => 'flu'
             ],
             [
-                'name' => 'Flu cuma berair'
+                'name' => 'Demam'
             ],
             [
-                'name' => 'Sering merasa sakit pada tenggorokkan'
+                'name' => 'Sakit tenggorokan'
             ],
             [
-                'name' => 'Sedang merasa demam'
+                'name' => 'sesak nafas'
             ],
             [
-                'name' => 'Suhu badan tidak menentu'
+                'name' => 'denyut jantung'
             ],
             [
-                'name' => 'Tidak mengalami gejala dalam sebuah pernafasan'
+                'name' => 'indra penciuman'
             ],
             [
-                'name' => 'Merasakan sebuah denyut jantung yang normal'
+                'name' => 'indra pengecap'
             ],
             [
-                'name' => 'Indra penciuman yang tidak berfungsi'
-            ],
-
-            // Sedang
-            [
-                'name' => 'Saya pernah melakukan perjalanan keluar negeri'
+                'name' => 'kondisi'
             ],
             [
-                'name' => 'Batuk berdahak'
+                'name' => 'diare'
             ],
             [
-                'name' => 'Flu berlendir'
+                'name' => 'nyeri tulang otot'
             ],
             [
-                'name' => 'tenggorokan terasa nyeri'
+                'name' => 'fatingue'
             ],
             [
-                'name' => 'Panas badan tidak mau turun'
+                'name' => 'melakukan perjalanan'
             ],
             [
-                'name' => 'Suhu badan diatas 39 derajat'
+                'name' => 'sakit kepala'
             ],
             [
-                'name' => 'Merasa kesulitan bernapas atau sesak napas'
+                'name' => 'nyeri badan'
             ],
             [
-                'name' => 'Merasakan nyeri pada badan'
+                'name' => 'susah bernafas panjang'
             ],
             [
-                'name' => 'Susah menarik nafas panjang'
+                'name' => 'ruam pada kulit, atau perubahan warna pada jari tangan atau jari kaki'
             ],
             [
-                'name' => 'terdapat ruam pada kulit, atau perubahan warna pada jari tangan atau jari kaki'
+                'name' => 'saturasi oksigen'
             ],
             [
-                'name' => 'Sakit kepala'
-            ],
-
-            // Berat
-            [
-                'name' => 'Pernah melakukan perjalanan luar kota kontak dengan pasien terinfeksi covid 19'
+                'name' => 'komorbid (penyakit bawaan)'
             ],
             [
-                'name' => 'Merasakan batuk'
+                'name' => 'selera makan'
             ],
             [
-                'name' => 'Mengalami sakit tenggorokan'
+                'name' => 'pucat'
             ],
             [
-                'name' => 'Panas tinggi sekali'
+                'name' => 'nyeri dada'
             ],
-            [
-                'name' => 'Merasakan dada sesak'
-            ],
-            [
-                'name' => 'Kepala terasa sakit'
-            ],
-        ]);
+        ];
+        collect($datas)->each(function ($data) { Symptom::create($data); });
         Schema::enableForeignKeyConstraints(); 
     }
 }
