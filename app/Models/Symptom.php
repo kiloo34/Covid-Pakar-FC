@@ -18,7 +18,7 @@ class Symptom extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function deseaseCategory(): HasMany
+    public function symptom_categories(): HasMany
     {
         return $this->hasMany(SymptomCategory::class);
     }

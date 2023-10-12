@@ -8,8 +8,10 @@ use App\Http\Controllers\Admin\DiseaseController as AdminDisease;
 
 // Pakar
 use App\Http\Controllers\Pakar\DashboardController as PakarDashboard;
+use App\Http\Controllers\Pakar\DiagnoseController;
 use App\Http\Controllers\Pakar\DiseaseCategoryController as PakarDiseaseCategory;
 use App\Http\Controllers\Pakar\SymptomController as PakarSymptom;
+use App\Models\Diagnose;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +64,9 @@ Route::middleware(['auth'])->group(function () {
         // Ajax
         Route::get('ajax/gejala/all', [PakarSymptom::class, 'getAllDataCategory'])->name('ajax.gejala.all');
         Route::get('ajax/gejala/{kategori_penyakit}/all', [PakarSymptom::class, 'getAllSympthom'])->name('ajax.gejala.detail.list');
+
+        // Diagnose
+        Route::resource('diagnosa', DiagnoseController::class);
     });
 });
 
