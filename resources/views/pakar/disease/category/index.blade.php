@@ -74,7 +74,6 @@
                     type: 'DELETE',
                     data: {id: id, '_method':'DELETE'},
                     success: function (response) {
-                        // $($object).parents('tr').remove();
                         Swal.fire({
                             title: "Data Dihapus!",
                             text: response.message,
