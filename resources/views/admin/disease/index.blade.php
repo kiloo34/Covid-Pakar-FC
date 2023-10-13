@@ -48,23 +48,46 @@
                 {data: 'action', name: 'action'},
             ]
         });
-
-        $('.hapus-penyakit').on('click', function (e) {
-            e.preventDefault();
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            var id = $(this).data("id");            
-            url = url.replace(':id', id);
-            $object=$(this);
-
-            console.log(id);
-        });
     });
+
+    function deleteDisease (id) {
+        var url = "{{ route('admin.penyakit.destroy', ':id') }}"
+        url = url.replace(':id', id)
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Yakin Hapus Data ini?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    data: {id: id, '_method':'DELETE'},
+                    success: function (response) {
+                        // $($object).parents('tr').remove();
+                        Swal.fire({
+                            title: "Data Dihapus!",
+                            text: response.message,
+                            icon: 'success',
+                        });
+                        reloadTable('#disease-category');
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR, textStatus, errorThrown);
+                        Swal.fire({
+                            title: "Data Gagal Dihapus!",
+                            icon: 'error',
+                        })
+                    }
+                });
+            }
+        });
+    }
 </script>
 @endpush
 

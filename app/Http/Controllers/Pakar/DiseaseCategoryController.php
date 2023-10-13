@@ -92,7 +92,7 @@ class DiseaseCategoryController extends Controller
     {
         $kategori_penyakit->delete();
         return response()->json([
-            'message' => 'Data Order berhasil dihapus!'
+            'message' => 'Data Kategori berhasil dihapus!'
         ]);
     }
 
