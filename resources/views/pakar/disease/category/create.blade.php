@@ -26,8 +26,6 @@
                         </span>
                         @enderror
                     </div>
-                    
-                    <div class="form-group">
                         <label>{{ __("Kategori Penyakit") }}</label>
                         <input type="text" name="category" class="form-control @error('category') is-invalid @enderror" value="{{ old('category') }}" autocomplete="category" autofocus>
                         @error('category')
