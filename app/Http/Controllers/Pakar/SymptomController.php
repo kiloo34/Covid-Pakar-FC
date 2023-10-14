@@ -8,6 +8,7 @@ use App\Http\Requests\Pakar\Symptom\UpdateSymptomRequest;
 use App\Models\Disease;
 use App\Models\DiseaseCategory;
 use App\Models\Symptom;
+use App\Models\SymptomCategory;
 use App\Models\SymptomDiseaseCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,12 +35,16 @@ class SymptomController extends Controller
     public function create()
     {
         $diseases = Disease::all();
+        $symptoms = Symptom::all();
         $category = DiseaseCategory::all();
+        $symptomCategories = SymptomCategory::all();
         return view('pakar.symptom.create', [
             'title'             => 'gejala',
             'subtitle'          => 'create',
             'diseases'          => $diseases,
+            'symptoms'          => $symptoms,
             'diseaseCategories' => $category,
+            'symptomCategories' => $symptomCategories,
             'active'            => 'symptom'
         ]);
     }
@@ -49,21 +54,66 @@ class SymptomController extends Controller
      */
     public function store(StoreSymptomRequest $request)
     {   
+        if ($request->category === 'new' && $request->symptomName === 'new') {
+            $this->newSymptom($request);
+        } elseif ($request->category === 'new' && $request->symptomName !== 'new') {
+            $this->newSymptomCategory($request->symptomName, $request);
+        } else {
+            DB::transaction(function () use ($request): void {
+                $map = new SymptomDiseaseCategory;
+                $map->symptom_category_id = $request->category;
+                $map->disease_category_id = $request->diseaseCategory;
+                $map->save(); 
+            });
+        }
+        return redirect()->route('pakar.gejala.index')->with('success_msg', 'Data Gejala / Rule ' . $request->symptom_name .' berhasil ditambah');
+    }
+
+    protected function newSymptom($request) : void 
+    {
         DB::transaction(function () use ($request): void {
             $symptom = new Symptom;
-            $symptom->name = $request->symptomName;
+            $symptom->name = $request->symptomNameNew;
             $symptom->save();
             
             $category = DiseaseCategory::find($request->diseaseCategory);
+
+            $max = SymptomCategory::select('íd')->max('id');
+            $symptomCategory = new SymptomCategory;
+            $symptomCategory->name = $request->symptomCategoryName;
+            $symptomCategory->code = $this->generateCode($max);
+            $symptomCategory->symptom_id = $symptom->id;
+            $symptomCategory->save();
+
             $map = new SymptomDiseaseCategory;
-
-            $map->symptom_id = $symptom->id;
+            $map->symptom_category_id = $symptomCategory->id;
             $map->disease_category_id = $category->id;
-
             $map->save();
-        });
+        }); 
+    }
 
-        return redirect()->route('pakar.gejala.index')->with('success_msg', 'Data Gejala / Rule ' . $request->symptom_name .' berhasil ditambah');
+    protected function newSymptomCategory($symptomId, $request) : void 
+    {
+        DB::transaction(function () use ($request, $symptomId): void {
+            $category = DiseaseCategory::find($request->diseaseCategory);
+
+            $max = SymptomCategory::select('íd')->max('id');
+            $symptomCategory = new SymptomCategory;
+            $symptomCategory->name = $request->symptomCategoryName;
+            $symptomCategory->code = $this->generateCode($max);
+            $symptomCategory->symptom_id = $symptomId;
+            $symptomCategory->save();
+
+            $map = new SymptomDiseaseCategory;
+            $map->symptom_category_id = $symptomCategory->id;
+            $map->disease_category_id = $category->id;
+            $map->save();
+        }); 
+    }
+
+    protected function generateCode($maxId) : string 
+    {
+        return 'R' . ($maxId + 1);
     }
 
     /**
