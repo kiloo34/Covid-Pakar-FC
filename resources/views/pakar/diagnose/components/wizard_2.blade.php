@@ -76,20 +76,40 @@
     }
 
     function nextToWizard3() {
-
         
         $("#diagnoseForm1").submit(function(e) {
             e.preventDefault(); 
 
-            var form = $(this);
-            var url = "{{ route('pakar.diagnosa.store') }}"
+            Swal.fire({
+                title: 'Data Gejala Akan di Submit',
+                text: "Yakin Submit Form Data ini?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya!'
+            }).then((result) => {
+                if (result.value) {
+                    var form = $(this);
+                    var url = "{{ route('pakar.diagnosa.store') }}"
 
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: form.serialize(), // serializes the form's elements.
-                success: function(data) {
-                    console.log(data);
+                    // console.log(form.serialize());
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: form.serialize(), // serializes the form's elements.
+                        success: function(datas) {
+                            showWizard(3, datas);
+                            // hideWizard(2);
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Dibatalkan',
+                        text: "",
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
                 }
             });
         });
