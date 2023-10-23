@@ -93,14 +93,12 @@
                     var form = $(this);
                     var url = "{{ route('pakar.diagnosa.store') }}"
 
-                    // console.log(form.serialize());
                     $.ajax({
                         type: "POST",
                         url: url,
                         data: form.serialize(), // serializes the form's elements.
                         success: function(datas) {
                             showWizard(3, datas);
-                            // hideWizard(2);
                         }
                     });
                 } else {

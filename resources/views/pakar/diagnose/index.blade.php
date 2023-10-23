@@ -48,6 +48,7 @@
                     content += '</tr>'
                 });
                 $('#processTable > tbody').append(content);
+                hideWizard(2, false);
             }
             document.getElementById(target).style.display = 'block';
             $(step).addClass('wizard-step-active');
