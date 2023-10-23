@@ -23,6 +23,7 @@
 </div>
 @endsection
 
+@include('import.datatable')
 @push('scripts')
     <script>
         $(document).ready(function () {
@@ -31,11 +32,26 @@
             $(".categorySymptomCheckbox").prop("checked", false);
         });
 
-        function showWizard(id) {
+        function showWizard(id, datas = null) {
             var target = "wizard"+id
             var step = "#wizardStep"+id
+
+            if (id === 3 && datas !== null) {
+                var table = document.getElementById('#processTable > tbody')
+                var content = '';
+                $.each(datas['process'], function (indexInArray, data) { 
+                    content += '<tr>'
+                    content += '<th scope="row">' + (indexInArray+1) + '</th>'
+                    content += '<td>' + data.category + '</td>'
+                    content += '<td>' + data.ruleEqualsPercent + '</td>'
+                    content += '<td><button class="btn btn-smal btn-primary" onClick=buttonDetail(' + data.ruleId + ')>Detail</button></td>'
+                    content += '</tr>'
+                });
+                $('#processTable > tbody').append(content);
+            }
             document.getElementById(target).style.display = 'block';
             $(step).addClass('wizard-step-active');
+
         }
         
         function hideWizard(id, condition = true) {
@@ -45,6 +61,11 @@
             if (condition) {
                 $(step).removeClass('wizard-step-active');
             }
+        }
+
+        function buttonDetail(id) {
+           console.log('masuk'); 
+           console.log(id); 
         }
     </script>
 @endpush
