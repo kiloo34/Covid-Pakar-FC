@@ -37,7 +37,6 @@
         datatableUrl = datatableUrl.replace(':id', symptomId)
 
         console.log(datatableUrl);
-        // console.log(diseaseId);
 
         $('#symptom-table').DataTable({
             "language": {

@@ -220,7 +220,7 @@ class SymptomController extends Controller
                 ->addIndexColumn()
                 ->addColumn('diseaseName', function($row){
                     $name = '';
-                    $name = $row->symptom->name;
+                    $name = $row->symptom_category->name;
                     return $name;
                 })
                 ->addColumn('action', function($row){
