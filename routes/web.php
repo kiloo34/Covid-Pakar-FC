@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 // Admin
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\DiseaseController as AdminDisease;
-
+use App\Http\Controllers\LandingPageController;
 // Pakar
 use App\Http\Controllers\Pakar\DashboardController as PakarDashboard;
 use App\Http\Controllers\Pakar\DiagnoseController;
@@ -24,9 +24,7 @@ use App\Models\Diagnose;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', LandingPageController::class)->name('landing');
 
 Auth::routes();
 
