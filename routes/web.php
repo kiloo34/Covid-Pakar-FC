@@ -25,6 +25,7 @@ use App\Models\Diagnose;
 */
 
 Route::get('/', LandingPageController::class)->name('landing');
+Route::post('guest/diagnose', [LandingPageController::class, 'store'])->name('guest.diagnose.store');
 
 Auth::routes();
 
