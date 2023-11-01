@@ -91,7 +91,7 @@
             }).then((result) => {
                 if (result.value) {
                     var form = $(this);
-                    var url = "{{ route('pakar.diagnosa.store') }}"
+                    var url = "{{ route('guest.diagnose.store') }}"
 
                     $.ajax({
                         type: "POST",
