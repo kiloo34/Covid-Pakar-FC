@@ -11,6 +11,7 @@ use App\Http\Controllers\Pakar\DashboardController as PakarDashboard;
 use App\Http\Controllers\Pakar\DiagnoseController;
 use App\Http\Controllers\Pakar\DiseaseCategoryController as PakarDiseaseCategory;
 use App\Http\Controllers\Pakar\SymptomController as PakarSymptom;
+use App\Http\Controllers\Pakar\SymptomCategoryController as PakarSymptomCategory;
 use App\Models\Diagnose;
 
 /*
@@ -61,8 +62,16 @@ Route::middleware(['auth'])->group(function () {
         // Symptom
         Route::resource('gejala', PakarSymptom::class);
         // Ajax
-        Route::get('ajax/gejala/all', [PakarSymptom::class, 'getAllDataCategory'])->name('ajax.gejala.all');
+        Route::get('ajax/gejala/symptom', [PakarSymptom::class, 'getAllDataSymptom'])->name('ajax.gejala.all');
+        Route::get('ajax/gejala/all', [PakarSymptom::class, 'getAllDataCategory'])->name('ajax.gejala.category');
         Route::get('ajax/gejala/{kategori_penyakit}/all', [PakarSymptom::class, 'getAllSympthom'])->name('ajax.gejala.detail.list');
+        
+        // Symptom Category
+        Route::resource('kategori_gejala', PakarSymptomCategory::class)->except(['index', 'create', 'store']);
+        Route::get('kategori_gejala/{gejala}/index', [PakarSymptomCategory::class, 'index'])->name('kategoriGejala.index');
+        // Ajax
+        Route::get('ajax/kategori_gejala/{gejala}/all', [PakarSymptomCategory::class, 'getCategorySympthom'])->name('ajax.kategoriGejala');
+        
 
         // Diagnose
         Route::resource('diagnosa', DiagnoseController::class);
