@@ -119,7 +119,7 @@ class SymptomController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DiseaseCategory $gejala)
+    public function show(Symptom $gejala)
     {
         return view('pakar.symptom.show', [
             'title'             => 'gejala',
@@ -132,29 +132,97 @@ class SymptomController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Symptom $symptom)
+    public function edit(Symptom $gejala)
     {
-        //
+        return view('pakar.symptom.edit', [
+            'title'     => 'gejala',
+            'subtitle'  => 'edit',
+            'symptom'   => $gejala,
+            'active'    => 'symptom'
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSymptomRequest $request, Symptom $symptom)
+    public function update(UpdateSymptomRequest $request, Symptom $gejala)
     {
-        //
+        $gejala->name = $request->symptom;
+        $gejala->save();
+        return redirect()->route('pakar.gejala.index')->with('success_msg', 'Data ' . $request->symptom .' berhasil Update');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Symptom $symptom)
+    public function destroy(Symptom $gejala)
     {
-        //
+        $gejala->delete();
+        return response()->json([
+            'message' => 'Data berhasil dihapus!'
+        ]);
+    }
+
+    public function getAllDataSymptom(Request $request)
+    {
+        // dd('masuk');
+        if($request->ajax()) {
+            $symptoms = Symptom::all();
+            $dataTable = DataTables::of($symptoms)
+                ->addIndexColumn()
+                ->addColumn('symptomName', function($row){
+                    $symptomName = '';
+                    $symptomName = ucfirst($row->name);
+                    return $symptomName;
+                })
+                ->addColumn('symptomCategoryCount', function($row){
+                    // if (count($row->symptomCategory) != 0) {
+                    //     $symptomName = '<ul>';
+                    //     foreach ($row as $data) {
+                    //         $symptomName .= '<li>';
+                    //         $symptomName .= $data->symptom_category->symptom->name ?? ' ';
+                    //         $symptomName .= ' ' . $data->symptom_category->name;
+                    //         $symptomName .= '</li>';
+                    //     }
+                    //     $symptomName .= '</li>';
+                    // } else {
+                    //     $symptomName = 'data gejala tidak ditemukan';
+                    // }
+                    $symptomCategoryCount = 0;
+                    $symptomCategoryCount = count($row->symptomCategory);
+                    return $symptomCategoryCount;
+                })
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="'.route("pakar.gejala.show", $row->id).'" class="btn btn-sm btn-info">
+                                    <i class="fas fa-eye"></i>
+                                    Detail
+                                </a>
+                                <a href="'.route("pakar.kategoriGejala.index", $row->id).'" class="btn btn-sm btn-info">
+                                    <i class="fas fa-eye"></i>
+                                    Detail Kategori
+                                </a>
+                                <a href="'.route("pakar.gejala.edit", $row->id).'" class="btn btn-sm btn-info">
+                                    <i class="fas fa-edit"></i>
+                                    Edit
+                                </a>
+                                <a href="javascript:void(0)" class="btn btn-sm btn-danger" onclick="deleteSymptom('.$row->id.')">
+                                    <i class="fas fa-edit"></i>
+                                    Hapus
+                                </a>
+                                ';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action', 'name'])
+                ->make(true);
+            return $dataTable;
+        } else {
+            return response()->json(['text'=>'only ajax request']);
+        } 
     }
 
     public function getAllDataCategory(Request $request)
     {
+        // dd('masuyk');
         if($request->ajax()) {
             $categories = DiseaseCategory::all();
             $dataTable = DataTables::of($categories)
