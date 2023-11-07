@@ -16,14 +16,17 @@ class DiseaseCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Disease $disease)
     {
-        return view('pakar.disease.index', [
-            'title'     => 'kategori_penyakit',
-            'subtitle'  => '',
-            'data'      => '',
-            'active'    => 'diseaseCategory'
-        ]);
+        $datas = DiseaseCategory::where('disease_id', $disease->id)->get();
+        return view('pakar.disease.category.index', [
+            'title'         => 'kategori_penyakit',
+            'subtitle'      => 'index',
+            'data'          => '',
+            'diseasesCat'   => $datas,
+            'disease'       => $disease,
+            'active'        => 'diseaseCategory'
+        ]); 
     }
 
     /**
@@ -58,13 +61,13 @@ class DiseaseCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Disease $kategori_penyakit)
+    public function show(DiseaseCategory $kategori_penyakit)
     {
-        return view('pakar.disease.category.index', [
+        return view('pakar.disease.category.show', [
             'title'     => 'kategori_penyakit',
             'subtitle'  => 'create',
             'data'      => '',
-            'disease'   => $kategori_penyakit,
+            'diseaseCat'=> $kategori_penyakit,
             'active'    => 'diseaseCategory'
         ]); 
     }
@@ -72,17 +75,27 @@ class DiseaseCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(DiseaseCategory $kategori_penyakit)
     {
-        //
+        return view('pakar.disease.category.edit', [
+            'title'     => 'kategori_penyakit',
+            'subtitle'  => 'edit',
+            'data'      => '',
+            'diseaseCat'=> $kategori_penyakit,
+            'active'    => 'diseaseCategory'
+        ]); 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDiseaseCategoryRequest $request, string $id)
+    public function update(UpdateDiseaseCategoryRequest $request, DiseaseCategory $kategori_penyakit)
     {
-        //
+        $kategori_penyakit->name = $request->category;
+        $kategori_penyakit->save();
+        return redirect()
+            ->route('pakar.kategori_penyakit.show', $kategori_penyakit->disease->id)
+            ->with('success_msg', 'Data ' . $request->category .' berhasil Update');
     }
 
     /**
@@ -96,42 +109,6 @@ class DiseaseCategoryController extends Controller
         ]);
     }
 
-    public function getAllData(Request $request)
-    {
-        if($request->ajax()) {
-            $datas = Disease::all();
-            return DataTables::of($datas)
-                ->addIndexColumn()
-                ->addColumn('name', function($row){
-                    $name = '';
-                    $name = $row->name;
-                    return $name;
-                })
-                ->addColumn('code', function($row){
-                    $code = '';
-                    $code = ucwords($row->code);
-                    return $code;
-                })
-                ->addColumn('total', function($row){
-                    $total = '';
-                    // dump($row->categories);
-                    $total = DiseaseCategory::where('disease_id', $row->id)->count();
-                    // $total = $row->category == null ? 0 : count($row->category);
-                    return $total;
-                })
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="'.route("pakar.kategori_penyakit.show", $row->id).'" class="btn btn-sm btn-info">
-                                    <i class="fas fa-eye"></i>
-                                    Detail
-                                </a>';
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        } else {
-            return response()->json(['text'=>'only ajax request']);
-        }
-    }
     public function getAllDataCategory(Request $request, $diseaseId)
     {
         if($request->ajax()) {
