@@ -19,9 +19,9 @@ class DiseaseCategory extends Model
     ];
 
     /**
-     * Get the disease associated with the DiseaseCategory
+     * Get the disease that owns the DiseaseCategory
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function disease(): BelongsTo
     {

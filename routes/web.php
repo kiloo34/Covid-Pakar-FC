@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DiseaseController as AdminDisease;
 use App\Http\Controllers\LandingPageController;
 // Pakar
 use App\Http\Controllers\Pakar\DashboardController as PakarDashboard;
+use App\Http\Controllers\Pakar\DiseaseController as PakarDisease;
 use App\Http\Controllers\Pakar\DiagnoseController;
 use App\Http\Controllers\Pakar\DiseaseCategoryController as PakarDiseaseCategory;
 use App\Http\Controllers\Pakar\SymptomController as PakarSymptom;
@@ -53,10 +54,14 @@ Route::middleware(['auth'])->group(function () {
         // Dashboard
         Route::get('/dashboard', [PakarDashboard::class, 'index'])->name('dashboard.index');
         
+        // Disease 
+        Route::get('penyakit', PakarDisease::class)->name('penyakit.index');
+        Route::get('ajax/penyakit/all', [PakarDisease::class, 'getAllData'])->name('ajax.penyakit.all');
+
         // Disease Category
-        Route::resource('kategori_penyakit', PakarDiseaseCategory::class);
+        Route::resource('kategori_penyakit', PakarDiseaseCategory::class)->except(['index']);
+        Route::get('/kategori_penyakit/{disease}/index', [PakarDiseaseCategory::class, 'index'])->name('kategori_penyakit.index');
         // Ajax
-        Route::get('ajax/penyakit/all', [PakarDiseaseCategory::class, 'getAllData'])->name('ajax.penyakit.all');
         Route::get('ajax/kategori_penyakit/{diseaseId}/all', [PakarDiseaseCategory::class, 'getAllDataCategory'])->name('ajax.category.all');
         
         // Symptom
