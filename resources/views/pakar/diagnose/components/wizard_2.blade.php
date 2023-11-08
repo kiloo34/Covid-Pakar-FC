@@ -35,7 +35,7 @@
                     <div class="col-12 col-lg-3 col-md-4 col-sm-6">
                         <div class="form-group">
                             <label class="d-block">{{ ucfirst($gejala->name) ?? "" }}</label>
-                            @foreach ($gejala->symptom_categories as $category) 
+                            @foreach ($gejala->symptomCategory as $category) 
                             <div class="form-check">
                                 <input class="form-check-input categorySymptomCheckbox" type="checkbox" name="categorySymptoms[]" value="{{$category->code}}" id="categorySymptom{{$category->id}}" />
                                 <label class="form-check-label" for="categorySymptom{{$category->id}}">
