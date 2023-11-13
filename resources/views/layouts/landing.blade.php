@@ -32,6 +32,11 @@
                     <div class="navbar-nav">
                         {{-- <a href="#" class="nav-link sidebar-gone-show" data-toggle="sidebar"><i class="fas fa-bars"></i></a> --}}
                     </div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="{{ route('landing') }}" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="{{ route('info') }}" class="nav-link">Info</a></li>
+                        <li class="nav-item"><a href="{{ route('diagnosa') }}" class="nav-link">Diagnosa</a></li>
+                    </ul>
                     <form class="form-inline ml-auto">
                         
                     </form>

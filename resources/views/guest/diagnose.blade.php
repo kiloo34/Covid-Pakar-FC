@@ -1,7 +1,6 @@
 @extends('layouts.landing')
 
 @section('content')
-@section('content')
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -71,4 +70,3 @@
         }
     </script>
 @endpush
-@endsection
