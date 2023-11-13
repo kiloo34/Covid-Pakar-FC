@@ -13,14 +13,34 @@ class LandingPageController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $symptoms = Symptom::has('symptomCategory')->get();
-        return view('guest.landing', [
+        return view('guest.home', [
             'title'     => 'landing',
+            'subtitle'  => '',
+            'data'      => '',
+            'active'    => ''
+        ]);
+    }
+
+    public function info()
+    {
+        return view('guest.info', [
+            'title'     => 'info',
+            'subtitle'  => '',
+            'data'      => '',
+            'active'    => ''
+        ]);
+    }
+
+    public function diagnose()
+    {
+        $symptoms = Symptom::has('symptomCategory')->get();
+        return view('guest.diagnose', [
+            'title'     => 'diagnosa',
             'subtitle'  => '',
             'data'      => '',
             'gejalas'   => $symptoms,
             'active'    => ''
-        ]);
+        ]); 
     }
 
     public function store(Request $request)
