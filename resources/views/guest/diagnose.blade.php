@@ -37,17 +37,17 @@
             var step = "#wizardStep"+id
 
             if (id === 3 && datas !== null) {
-                var table = document.getElementById('#processTable > tbody')
-                var content = '';
-                $.each(datas['process'], function (indexInArray, data) { 
-                    content += '<tr>'
-                    content += '<th scope="row">' + (indexInArray+1) + '</th>'
-                    content += '<td>' + data.category + '</td>'
-                    content += '<td>' + data.ruleEqualsPercent + '</td>'
-                    content += '<td><button class="btn btn-smal btn-primary" onClick=buttonDetail(' + data.ruleId + ')>Detail</button></td>'
-                    content += '</tr>'
-                });
-                $('#processTable > tbody').append(content);
+                // var table = document.getElementById('#processTable > tbody')
+                // var content = '';
+                // $.each(datas['process'], function (indexInArray, data) { 
+                //     content += '<tr>'
+                //     content += '<th scope="row">' + (indexInArray+1) + '</th>'
+                //     content += '<td>' + data.category + '</td>'
+                //     content += '<td>' + data.ruleEqualsPercent + '</td>'
+                //     content += '<td><button class="btn btn-smal btn-primary" onClick=buttonDetail(' + data.ruleId + ')>Detail</button></td>'
+                //     content += '</tr>'
+                // });
+                // $('#processTable > tbody').append(content);
                 hideWizard(2, false);
             }
             document.getElementById(target).style.display = 'block';
