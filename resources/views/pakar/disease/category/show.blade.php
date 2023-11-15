@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <h4>{{__('Data Gejala')}}</h4>
                     <div class="card-header-action">
-                        <a href="{{ route('pakar.gejala.index') }}" class="btn btn-danger">
+                        <a href="{{ route('pakar.kategori_penyakit.index', $diseaseCat->disease->id) }}" class="btn btn-danger">
                             {{__('Kembali ')}} 
                         </a>
                     </div>

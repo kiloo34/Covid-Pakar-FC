@@ -6,7 +6,7 @@
             <div class="card-header">
                 <h4>{{ ucwords(str_replace('_', ' ', $title)) }}</h4>
                 <div class="card-header-action">
-                    <a href="{{ route('pakar.kategori_penyakit.index') }}" class="btn btn-danger">Kembali </a>
+                    <a href="{{ route('pakar.kategori_penyakit.index', $diseaseCat->disease->id) }}" class="btn btn-danger">Kembali </a>
                 </div>
             </div>
             <div class="card-body">
