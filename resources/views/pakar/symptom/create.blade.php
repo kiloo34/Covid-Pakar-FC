@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('pakar.gejala.create') }}" method="post">
+                <form action="{{ route('pakar.gejala.store') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <label>{{ __("Nama Wabah / Penyakit / Virus") }}</label>
