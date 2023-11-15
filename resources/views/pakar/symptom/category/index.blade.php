@@ -5,21 +5,19 @@
         <div class="col-md-12 ">
             <div class="card">
                 <div class="card-header">
-                    <h4>{{__('Daftar Gejala')}}</h4>
+                    <h4>{{__('Daftar Kategori Gejala')}} {{ $symptom->name }}</h4>
                     <div class="card-header-action">
-                        <a href="{{ route('pakar.gejala.create') }}" class="btn btn-primary">
-                            {{__('Tambah ')}} 
-                            {{ ucwords(str_replace('_', ' ', $title)) }}
+                        <a href="{{ route('pakar.gejala.index') }}" class="btn btn-danger">
+                            {{__('Kembali ')}} 
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="symptom-table" class="table table-striped">
+                        <table id="symptom-category-table" class="table table-striped">
                             <thead>
                                 <th>{{__('No')}}</th>
-                                <th>{{__('Nama Gejala')}}</th>
-                                <th>{{__('Total Kategori')}}</th>
+                                <th>{{__('Nama Kategori Gejala')}}</th>
                                 <th>{{__('Aksi')}}</th>
                             </thead>
                         </table>
@@ -33,25 +31,29 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        $('#symptom-table').DataTable({
+        var datatableUrl = "{{ route('pakar.ajax.kategoriGejala', ':id') }}"
+        var symptomId = {{ $symptom->id }};
+        datatableUrl = datatableUrl.replace(':id', symptomId);
+
+        console.log(datatableUrl);
+        $('#symptom-category-table').DataTable({
             "language": {
                 "emptyTable": "Data Gejala Kosong"
             },
             "responsive": true,
             "processing": true,
             "serverSide": true,
-            "ajax": "{{ route('pakar.ajax.gejala.all') }}",
+            "ajax": datatableUrl,
             "columns": [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'symptomName', name: 'symptomName'},
-                {data: 'symptomCategoryCount', name: 'symptomCategoryCount'},
+                {data: 'categoryName', name: 'Name'},
                 {data: 'action', name: 'action'},
             ]
         });
     });
 
-    function deleteSymptom (id) {
-        var url = "{{ route('pakar.gejala.destroy', ':id') }}"
+    function deleteSymptomCategory (id) {
+        var url = "{{ route('pakar.kategori_gejala.destroy', ':id') }}"
         url = url.replace(':id', id)
 
         Swal.fire({
@@ -75,7 +77,7 @@
                             text: response.message,
                             icon: 'success',
                         });
-                        reloadTable('#symptom-table');
+                        reloadTable('#symptom-category-table');
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         console.log(jqXHR, textStatus, errorThrown);

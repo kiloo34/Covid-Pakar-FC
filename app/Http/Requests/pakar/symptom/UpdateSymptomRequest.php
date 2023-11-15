@@ -11,7 +11,7 @@ class UpdateSymptomRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class UpdateSymptomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'symptom' => 'required|unique:symptoms,name|max:255',
         ];
     }
 }
