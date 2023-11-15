@@ -37,17 +37,27 @@
             var step = "#wizardStep"+id
 
             if (id === 3 && datas !== null) {
-                // var table = document.getElementById('#processTable > tbody')
-                // var content = '';
-                // $.each(datas['process'], function (indexInArray, data) { 
-                //     content += '<tr>'
-                //     content += '<th scope="row">' + (indexInArray+1) + '</th>'
-                //     content += '<td>' + data.category + '</td>'
-                //     content += '<td>' + data.ruleEqualsPercent + '</td>'
-                //     content += '<td><button class="btn btn-smal btn-primary" onClick=buttonDetail(' + data.ruleId + ')>Detail</button></td>'
-                //     content += '</tr>'
-                // });
-                // $('#processTable > tbody').append(content);
+                // var target = document.getElementById('#result')
+                var content = '';
+                $.each(datas['process'], function (indexInArray, data) { 
+                    content += '<div class="row d-flex justify-content-center">'
+                    content += '<div class="col-auto">'
+                    content += '<div class="result">'
+                    content += '<div class="pricing">'
+                    content += '<div class="pricing-title">'
+                    content += 'Hasil Diagnosa'
+                    content += '</div>'
+                    content += '<div class="pricing-padding">'
+                    content += '<div class="pricing-price">'
+                    content += '<div>' + data.category + '</div>'
+                    content += '</div>'
+                    content += '</div>'
+                    content += '</div>'
+                    content += '</div>'
+                    content += '</div>'
+                    content += '</div>'
+                });
+                $('#result').append(content);
                 hideWizard(2, false);
             }
             document.getElementById(target).style.display = 'block';

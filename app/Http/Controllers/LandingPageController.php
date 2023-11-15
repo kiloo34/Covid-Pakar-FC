@@ -54,10 +54,14 @@ class LandingPageController extends Controller
         $iteration = 0;
 
         $compare = [];
+        $prc = [];
         $res = [
             'process' => [],
             'ruleActual' => $actualRuleDatas
         ];
+
+        $max = 0.0;
+        $index = 0;
 
         // looping for rules from database
         foreach ($rules as $i => $rule) {
@@ -81,7 +85,7 @@ class LandingPageController extends Controller
                     $ruleEquals[$j] = $ruleData;
                 }
             }
-            $res['process'][$i] = [
+            $prc[$i] = [
                 'ruleId' => $rule->id,
                 'category' => $rule->disease_category->name,
                 'ruleCount' => count($ruleDatas),
@@ -89,7 +93,13 @@ class LandingPageController extends Controller
                 'ruleEqualsCount' => count($ruleEquals),
                 'ruleEqualsPercent' => round((count($ruleEquals) / count($ruleDatas)) * 100, 2)
             ];
+            $now = $prc[$i]['ruleEqualsPercent'];
+            if ($now > $max) {
+                $index = $i;
+                $max = $now;
+            }
         }
+        $res['process'][] = $prc[$index];
         return response()->json($res);
     }
 }
