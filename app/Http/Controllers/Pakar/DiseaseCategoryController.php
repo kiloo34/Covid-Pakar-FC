@@ -55,7 +55,7 @@ class DiseaseCategoryController extends Controller
         $category->disease_id = $request->disease;
 
         $category->save();
-        return redirect()->route('pakar.kategori_penyakit.index')->with('success_msg', 'Data Kategori Penyakit ' . $request->name .' dengan kode ' . $request->code . ' berhasil ditambah');
+        return redirect()->route('pakar.penyakit.index')->with('success_msg', 'Data Kategori Penyakit ' . $request->name .' dengan kode ' . $request->code . ' berhasil ditambah');
     }
 
     /**
