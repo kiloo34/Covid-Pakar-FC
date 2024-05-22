@@ -54,7 +54,7 @@ class SymptomSeeder extends Seeder
                 'name' => 'fatingue'
             ],
             [
-                'name' => 'perjalanan ke luar negri'
+                'name' => 'melakukan perjalanan'
             ],
             [
                 'name' => 'sakit kepala'
@@ -70,6 +70,9 @@ class SymptomSeeder extends Seeder
             ],
             [
                 'name' => 'saturasi oksigen'
+            ],
+            [
+                'name' => 'komorbid (penyakit bawaan)'
             ],
             [
                 'name' => 'selera makan'

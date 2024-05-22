@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSymptomCategoryRequest;
-use App\Http\Requests\UpdateSymptomCategoryRequest;
-use App\Models\SymptomCategory;
+use App\Http\Requests\StoreRuleRequest;
+use App\Http\Requests\UpdateRuleRequest;
+use App\Models\Rule;
 
-class SymptomCategoryController extends Controller
+class RuleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class SymptomCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSymptomCategoryRequest $request)
+    public function store(StoreRuleRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class SymptomCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SymptomCategory $symptomCategory)
+    public function show(Rule $rule)
     {
         //
     }
@@ -43,7 +43,7 @@ class SymptomCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SymptomCategory $symptomCategory)
+    public function edit(Rule $rule)
     {
         //
     }
@@ -51,7 +51,7 @@ class SymptomCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSymptomCategoryRequest $request, SymptomCategory $symptomCategory)
+    public function update(UpdateRuleRequest $request, Rule $rule)
     {
         //
     }
@@ -59,7 +59,7 @@ class SymptomCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SymptomCategory $symptomCategory)
+    public function destroy(Rule $rule)
     {
         //
     }

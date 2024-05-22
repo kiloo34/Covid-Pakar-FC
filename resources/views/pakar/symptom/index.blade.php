@@ -18,9 +18,8 @@
                         <table id="symptom-table" class="table table-striped">
                             <thead>
                                 <th>{{__('No')}}</th>
-                                <th>{{ __("Nama Wabah / Penyakit / Virus") }}</th>
-                                <th>{{__('Nama Kategori')}}</th>
                                 <th>{{__('Nama Gejala')}}</th>
+                                <th>{{__('Total Kategori')}}</th>
                                 <th>{{__('Aksi')}}</th>
                             </thead>
                         </table>
@@ -44,13 +43,51 @@
             "ajax": "{{ route('pakar.ajax.gejala.all') }}",
             "columns": [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'diseaseName', name: 'diseaseName'},
-                {data: 'diseaseCategory', name: 'diseaseCategory'},
-                {data: 'name', name: 'name'},
+                {data: 'symptomName', name: 'symptomName'},
+                {data: 'symptomCategoryCount', name: 'symptomCategoryCount'},
                 {data: 'action', name: 'action'},
             ]
         });
     });
+
+    function deleteSymptom (id) {
+        var url = "{{ route('pakar.gejala.destroy', ':id') }}"
+        url = url.replace(':id', id)
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Yakin Hapus Data ini?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    data: {id: id, '_method':'DELETE'},
+                    success: function (response) {
+                        // $($object).parents('tr').remove();
+                        Swal.fire({
+                            title: "Data Dihapus!",
+                            text: response.message,
+                            icon: 'success',
+                        });
+                        reloadTable('#symptom-table');
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR, textStatus, errorThrown);
+                        Swal.fire({
+                            title: "Data Gagal Dihapus!",
+                            icon: 'error',
+                        })
+                    }
+                });
+            }
+        });
+    }
 </script>
 @endpush
 

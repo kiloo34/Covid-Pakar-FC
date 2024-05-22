@@ -21,9 +21,9 @@ class Disease extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function categories(): BelongsTo
+    public function categories(): HasMany
     {
-        return $this->belongsTo(DiseaseCategory::class, 'disease_id');
+        return $this->hasMany(DiseaseCategory::class);
     }
 
     /**

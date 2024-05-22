@@ -22,8 +22,11 @@ class StoreSymptomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'symptomName' => 'required|unique:symptoms,name|max:255',
-            'diseaseCategory' => 'required'
+            'diseaseCategory' => 'required',
+            'category' => 'required',
+            'symptomName' => 'required_if:category,new|unique:symptoms,name|max:255',
+            'symptomNameNew' => 'required_if:symptomName,new|unique:symptoms,name|max:255',
+            'symptomCategoryName' => 'required_if:symptomName,new|unique:symptoms,name|max:255',
         ];
     }
 
@@ -39,6 +42,9 @@ class StoreSymptomRequest extends FormRequest
             'symptomName.unique' => 'Nama Gejala / Rule sudah tersedia',
             'symptomName.max' => 'Nama Gejala / Rule terlalu panjang maksimal :max karakter',
             'diseaseCategory.required' => 'Pilih Salah Satu',
+            'symptomName.required_if' =>  'Nama Gejala tidak boleh kosong jika ada kategori baru',
+            'symptomNameNew.required_if' =>  'Nama Gejala tidak boleh kosong jika ada gejala baru',
+            'symptomCategoryName.required_if' =>  'Nama Kategori Gejala tidak boleh kosong jika ada gejala baru',
         ];
     } 
 }

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-        <title>SIMPELAN</title>
+        <title>Sistem Pakar</title>
 
         <!-- General CSS Files -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -28,21 +28,21 @@
             <div class="main-wrapper container">
                 <div class="navbar-bg"></div>
                 <nav class="navbar navbar-expand-lg main-navbar">
-                    <a href="{{ route('landing') }}" class="navbar-brand sidebar-gone-hide">SIMPELAN</a>
+                    <a href="#" class="navbar-brand sidebar-gone-hide">Sistem Pakar</a>
                     <div class="navbar-nav">
-                        <a href="#" class="nav-link sidebar-gone-show" data-toggle="sidebar"><i
-                                class="fas fa-bars"></i></a>
+                        {{-- <a href="#" class="nav-link sidebar-gone-show" data-toggle="sidebar"><i class="fas fa-bars"></i></a> --}}
                     </div>
-                    {{-- <div class="nav-collapse">
-                        <a class="sidebar-gone-show nav-collapse-toggle nav-link" href="#">
-                            <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <ul class="navbar-nav">
-                            <li class="nav-item active"><a href="#" class="nav-link">Application</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link">Report Something</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link">Server Status</a></li>
-                        </ul>
-                    </div> --}}
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="{{ route('landing') }}" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="{{ route('info') }}" class="nav-link">Info</a></li>
+                        <li class="nav-item"><a href="{{ route('diagnosa') }}" class="nav-link">Diagnosa</a></li>
+                    </ul>
+                    <form class="form-inline ml-auto">
+                        
+                    </form>
+                    <ul class="navbar-nav navbar-right">
+                        <li class="nav-item active"><a href="{{ route('login') }}" class="nav-link">Login</a></li>
+                    </ul>
                 </nav>
 
                 <!-- Main Content -->

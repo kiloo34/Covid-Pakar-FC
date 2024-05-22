@@ -94,7 +94,9 @@ class DiseaseController extends Controller
     public function destroy(Disease $penyakit)
     {
         $penyakit->delete();
-        return redirect()->route('admin.penyakit.index')->with('success_msg', 'Data Penyakit dihapus'); 
+        return response()->json([
+            'message' => 'Data berhasil dihapus!'
+        ]);
     }
 
     public function getAllData(Request $request)
@@ -122,7 +124,7 @@ class DiseaseController extends Controller
                                     <i class="fas fa-edit"></i>
                                     Edit
                                 </a>
-                                <a href="'.route("admin.penyakit.destroy", $row->id).'" class="btn btn-sm btn-danger hapus-penyakit" data-id="'.$row->id.'">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-danger" onclick="deleteDisease('.$row->id.')">
                                     <i class="fas fa-edit"></i>
                                     Hapus
                                 </a>';

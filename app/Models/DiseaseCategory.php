@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -18,13 +19,13 @@ class DiseaseCategory extends Model
     ];
 
     /**
-     * Get the disease associated with the DiseaseCategory
+     * Get the disease that owns the DiseaseCategory
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function disease(): HasOne
+    public function disease(): BelongsTo
     {
-        return $this->hasOne(Disease::class, 'disease_id');
+        return $this->belongsTo(Disease::class, 'disease_id');
     }
 
     /**
@@ -35,5 +36,15 @@ class DiseaseCategory extends Model
     public function symptom_disease_categories(): HasMany
     {
         return $this->hasMany(SymptomDiseaseCategory::class);
+    }
+
+    /**
+     * Get the rule associated with the DiseaseCategory
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function rule(): HasOne
+    {
+        return $this->hasOne(Rule::class);
     }
 }

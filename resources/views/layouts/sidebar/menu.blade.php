@@ -11,12 +11,18 @@
     <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Penyakit</span></a>
     <ul class="dropdown-menu">
         <li class="{{ $active == 'diseaseCategory' ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('pakar.kategori_penyakit.index') }}">{{ __('Kategori Penyakit') }}</a>
+            <a class="nav-link" href="{{ route('pakar.penyakit.index') }}">{{ __('Kategori Penyakit') }}</a>
         </li>
         <li class="{{ $active == 'symptom' ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('pakar.gejala.index') }}">{{ __('Gejala') }}</a>
         </li>
     </ul>
+</li>
+<li class="{{ $active == 'diagnose' ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('pakar.diagnosa.index') }}">
+        <i class="far fa-pills"></i>
+        <span>{{__('Diagnosa')}}</span>
+    </a>
 </li>
 @endif
 {{-- <li class="nav-item dropdown {{ $active == 'produksi' || $active == 'permintaan' ? 'active' : '' }}">
