@@ -53,7 +53,7 @@ class SymptomController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreSymptomRequest $request)
-    {   
+    {
         if ($request->category === 'new' && $request->symptomName === 'new') {
             $this->newSymptom($request);
         } elseif ($request->category === 'new' && $request->symptomName !== 'new') {

@@ -21,15 +21,15 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('pakar.gejala.update') }}" method="post">
+                <form action="{{ route('pakar.gejala.store') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <label>{{ __("Nama Wabah / Penyakit / Virus") }}</label>
                         <select name="diseaseCategory" id="disease" class="form-control @error('diseaseCategory') is-invalid @enderror" value="{{ old('diseaseCategory') }}" autofocus>
                             <option value="">{{ __("Pilih Kategori Wabah / Penyakit / Virus") }}</option>
-                            {{-- @foreach ($diseaseCategories as $diseaseCategory)
+                            @foreach ($diseaseCategories as $diseaseCategory)
                                 <option value="{{$diseaseCategory->id}}"> {{ ucfirst($diseases->find($diseaseCategory->disease_id)->name) }} - {{ ucfirst($diseaseCategory->name) }}</option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
                         @error('diseaseCategory')
                         <span class="invalid-feedback" role="alert">
@@ -42,9 +42,9 @@
                         <label>{{ __("Nama Kategori Gejala") }}</label>
                         <select name="category" id="category" class="form-control @error('category') is-invalid @enderror" value="{{ old('category') }}" autofocus>
                             <option value="">{{ __("Pilih Nama Gejala") }}</option>
-                            {{-- @foreach ($symptomCategories as $category)
+                            @foreach ($symptomCategories as $category)
                                 <option value="{{$category->id}}">{{ ucfirst($category->symptom->name) }} {{ ucfirst($category->name) }}</option>
-                            @endforeach --}}
+                            @endforeach
                             <option value="new">{{ __("Data Kategori Gejala Baru") }}</option>
                         </select>
                         @error('category')
