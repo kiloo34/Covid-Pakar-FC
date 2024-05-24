@@ -46,7 +46,6 @@ class LandingPageController extends Controller
     public function store(Request $request)
     {
         $actualRuleDatas = [];
-        $actualRuleDatas = [];
         $rules = Rule::all();
 
         $actualRuleDatas = $request->categorySymptoms;
@@ -62,6 +61,8 @@ class LandingPageController extends Controller
 
         $max = 0.0;
         $index = 0;
+        $percent = 0.0;
+        $desc = '';
 
         // looping for rules from database
         foreach ($rules as $i => $rule) {
@@ -85,13 +86,22 @@ class LandingPageController extends Controller
                     $ruleEquals[$j] = $ruleData;
                 }
             }
+            
+            
+            $percent = round((count($ruleEquals) / count($ruleDatas)) * 100, 2);
+            if ($percent == 100) {
+                $desc = 'Terinfeksi ' . $rule->disease_category->name;
+            } else {
+                $desc = 'Hasil Sementara Gejala memiliki tingkat kemiripan ' . $percent . ' dengan ' . $rule->disease_category->name . ' Lakukan PCR untuk tes Lanjutan';
+            }
             $prc[$i] = [
                 'ruleId' => $rule->id,
-                'category' => $rule->disease_category->name,
+                'category' => $percent < 100 ? 'Tidak Terinfeksi' : $rule->disease_category->name,
                 'ruleCount' => count($ruleDatas),
                 'ruleEquals' => $ruleEquals,
                 'ruleEqualsCount' => count($ruleEquals),
-                'ruleEqualsPercent' => round((count($ruleEquals) / count($ruleDatas)) * 100, 2)
+                'ruleEqualsPercent' => $percent,
+                'description' => $desc
             ];
             $now = $prc[$i]['ruleEqualsPercent'];
             if ($now > $max) {

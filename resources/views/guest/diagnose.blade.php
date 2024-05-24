@@ -50,6 +50,7 @@
                     content += '<div class="pricing-padding">'
                     content += '<div class="pricing-price">'
                     content += '<div>' + data.category + '</div>'
+                    content += '<div>' + data.description + '</div>'
                     content += '</div>'
                     content += '</div>'
                     content += '</div>'
