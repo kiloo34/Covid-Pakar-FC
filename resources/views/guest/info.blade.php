@@ -56,11 +56,10 @@
         <div class="col-12 col-sm-6 col-md-6 col-lg-6">
             <article class="article article-style-b">
                 <div class="article-header">
-                    <div class="article-image" data-background="../assets/img/news/img13.jpg"></div>
+                    <div class="article-image" data-background="{{ asset('assets/img/content/rsud.png') }}"></div>
                 </div>
                 <div class="article-details">
-                    <div class="article-title">
-                        
+                    <div class="article-title"> 
                         <h2><a href="#">RSUD Tongas</a></h2>
                     </div>
                     <p>RSUD Tongas di Kabupaten Probolinggo, dengan fasilitas lengkap untuk penanganan pasien COVID-19 (tirto.id).</p>
@@ -70,7 +69,7 @@
         <div class="col-12 col-sm-6 col-md-6 col-lg-6">
             <article class="article article-style-b">
                 <div class="article-header">
-                    <div class="article-image" data-background="../assets/img/news/img13.jpg"></div>
+                    <div class="article-image" data-background="{{ asset('assets/img/content/saleh.png') }}"></div>
                 </div>
                 <div class="article-details">
                     <div class="article-title">
@@ -148,7 +147,7 @@
         <div class="col-12 col-sm-6 col-md-6 col-lg-6">
             <article class="article article-style-b">
                 <div class="article-header">
-                    <div class="article-image" data-background="../assets/img/news/img13.jpg"></div>
+                    <div class="article-image" data-background="{{ asset('assets/img/content/112.png') }}"></div>
                 </div>
                 <div class="article-details">
                     <div class="article-title">
@@ -161,7 +160,7 @@
         <div class="col-12 col-sm-6 col-md-6 col-lg-6">
             <article class="article article-style-b">
                 <div class="article-header">
-                    <div class="article-image" data-background="../assets/img/news/img13.jpg"></div>
+                    <div class="article-image" data-background="{{ asset('assets/img/content/bpbd.png') }}"></div>
                 </div>
                 <div class="article-details">
                     <div class="article-title">
