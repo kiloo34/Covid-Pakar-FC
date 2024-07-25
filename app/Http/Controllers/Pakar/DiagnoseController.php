@@ -7,7 +7,7 @@ use App\Http\Requests\Pakar\Diagnose\StoreDiagnoseRequest;
 use App\Http\Requests\Pakar\Diagnose\UpdateDiagnoseRequest;
 use App\Models\Diagnose;
 use App\Models\Rule;
-use App\Models\Symptom;
+use App\Models\SymptomCategory;
 
 class DiagnoseController extends Controller
 {
@@ -16,7 +16,8 @@ class DiagnoseController extends Controller
      */
     public function index()
     {
-        $symptoms = Symptom::all();
+        // $symptoms = Symptom::all();
+        $symptoms = SymptomCategory::all();
 
         return view('pakar.diagnose.index', [
             'title'     => 'diagnosa',
@@ -44,15 +45,21 @@ class DiagnoseController extends Controller
         $actualRuleDatas = [];
         $rules = Rule::all();
 
-        $actualRuleDatas = $request->categorySymptoms;
+        $actualDirtyRuleDatas = $request->categorySymptoms;
+        $actualRuleDatas = [];
         $suspect = [];
         $iteration = 0;
 
         $compare = [];
+        // dd($request->categorySymptoms);
         $res = [
             'process' => [],
             'ruleActual' => $actualRuleDatas
         ];
+
+        foreach ($actualDirtyRuleDatas as $index => $a) {
+            $actualRuleDatas[] = $a;
+        }
 
         // looping for rules from database
         foreach ($rules as $i => $rule) {
