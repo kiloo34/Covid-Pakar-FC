@@ -18,7 +18,14 @@
                 <fieldset class="form-group">
                     @foreach ($gejalas as $index => $category)
                     <div class="row" id="row{{$index}}" style="{{ $index == 0 ? 'display: flex;' : 'display: none;' }}">
-                        <div class="col-form-label col-6 pt-0">Apakah Anda Merasakan {{ ucfirst($category->symptom->name) }} {{ ucfirst($category->name) ?? "" }}</div>
+                        <div class="col-form-label col-6 pt-0">
+                            @if ($category->custom_question == null)
+                            Apakah Anda Merasakan {{ ucfirst($category->symptom->name) }} {{ ucfirst($category->name) ?? "" }}        
+                            <!-- Apakah Anda Merasakan  -->
+                            @else 
+                            {{ $category->custom_question }}
+                            @endif
+                        </div>
                         <div class="col-6">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="categorySymptoms[{{$index}}]" id="opt1{{$index}}" value="{{$category->code}}">
@@ -48,12 +55,10 @@
 @push('scripts')
 <script>
     var selectedIndex = {{ $selectedIndex }};
-
     function backToWizard1() {
         showWizard(1);
         hideWizard(2);
     }
-
     function nextQuestion() {
         if (selectedIndex < {{ count($gejalas) - 1 }}) {
             document.getElementById('row' + selectedIndex).style.display = 'none';
@@ -63,7 +68,6 @@
             updateProgressBar(selectedIndex);
         }
     }
-
     function backQuestion() {
         if (selectedIndex > 0) {
             document.getElementById('row' + selectedIndex).style.display = 'none';
@@ -73,14 +77,12 @@
             updateProgressBar(selectedIndex);
         }
     }
-
     function updateButtons() {
         document.getElementById('backBtn').style.display = selectedIndex === 0 ? 'inline-block' : 'none';
         document.getElementById('nextBtn').style.display = selectedIndex === {{ count($gejalas) - 1 }} ? 'inline-block' : 'none';
         document.getElementById('backQuestionBtn').style.display = selectedIndex > 0 ? 'inline-block' : 'none';
         document.getElementById('nextQuestionBtn').style.display = selectedIndex < {{ count($gejalas) - 1 }} ? 'inline-block' : 'none';
     }
-
     function updateProgressBar(step) {
         var totalSteps = {{ count($gejalas) }};
         var percentage = ((step + 1) / totalSteps) * 100;
@@ -88,13 +90,11 @@
         document.querySelector('.progress-bar').textContent = percentage.toFixed(0) + '%';;
         document.querySelector('.progress-bar').setAttribute('aria-valuenow', percentage);
     }
-
     // Initialize the form on page load
     document.addEventListener('DOMContentLoaded', function() {
         updateButtons();
         updateProgressBar(selectedIndex);
     });
-
     
     function hideWizard(id, condition = true) {
         var target = "wizard"+id
@@ -104,12 +104,10 @@
             $(step).removeClass('wizard-step-active');
         }
     }
-
     function nextToWizard3() {
         
         $("#diagnoseForm1").submit(function(e) {
             e.preventDefault(); 
-
             Swal.fire({
                 title: 'Data Gejala Akan di Submit',
                 text: "Yakin Submit Form Data ini?",
@@ -141,6 +139,5 @@
             });
         });
     }
-
 </script>
 @endpush

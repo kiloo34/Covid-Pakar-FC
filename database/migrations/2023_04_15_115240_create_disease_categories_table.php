@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name')->comment('name of disease category');
             $table->string('code')->comment('code of disease category');
             $table->unsignedBigInteger('disease_id');
-
             $table->foreign('disease_id')->references('id')->on('diseases');
 
             $table->timestamps();
