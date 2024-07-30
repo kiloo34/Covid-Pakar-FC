@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('code');
             $table->foreignId('symptom_id')->constrained();
+            $table->string('custom_question')->comment('custom question for better life')->nullable();
             $table->timestamps();
         });
     }
