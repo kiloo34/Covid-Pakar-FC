@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Rule;
 use App\Models\Symptom;
+use App\Models\SymptomCategory;
 use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
@@ -33,7 +34,8 @@ class LandingPageController extends Controller
 
     public function diagnose()
     {
-        $symptoms = Symptom::has('symptomCategory')->get();
+        // $symptoms = Symptom::has('symptomCategory')->get();
+        $symptoms = SymptomCategory::all();
         return view('guest.diagnose', [
             'title'     => 'diagnosa',
             'subtitle'  => '',

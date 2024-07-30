@@ -8,6 +8,7 @@ use App\Http\Requests\Pakar\Diagnose\UpdateDiagnoseRequest;
 use App\Models\Diagnose;
 use App\Models\Rule;
 use App\Models\Symptom;
+use App\Models\SymptomCategory;
 
 class DiagnoseController extends Controller
 {
@@ -16,7 +17,8 @@ class DiagnoseController extends Controller
      */
     public function index()
     {
-        $symptoms = Symptom::all();
+        // $symptoms = Symptom::all();
+        $symptoms = SymptomCategory::all();
 
         return view('pakar.diagnose.index', [
             'title'     => 'diagnosa',
